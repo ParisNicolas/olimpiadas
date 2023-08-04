@@ -50,5 +50,5 @@ function otroPrimo(){
 }
 
 //RESULTADOS
-console.log("\n_" + cadenas(261997) + "_ Es el resultado");
+console.log("\n_" + cadenas(100000000000000000000) + "_ Es el resultado");
 console.log(multiplos);
