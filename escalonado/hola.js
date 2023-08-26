@@ -1,7 +1,7 @@
 let sum = 0;
             //4,3,2,1,0 posiciones
 //let digits = [3,4,2,8,2].reverse(); //numero 34.282
-let digits = [1,9,4];
+let digits = [2,0,0,0];
 
 
 /*
@@ -14,7 +14,7 @@ R --> Limitante (default hasta 1)
 */
 function sumer(n, s, R = -1){
     //Casos Base
-    if(R==0 || n==9) return R; //n == 9?
+    if(R==0) return R; //n == 9? Creo que no hace falta
     if(n==1 || s<1) return n;
     if(R==1){
         return sumer(n, s-1);
@@ -24,96 +24,72 @@ function sumer(n, s, R = -1){
     return sumer(n, s-1) + sumer(n-1, s, R-1);
 }
 
-let cicles = [];
-for(let i = 0; i < digits.length; i++){
-    if(i == digits.length-1 || i == digits.length-2){
-        let base = 9-digits.length+i;
-    let recursivity = digits.length-1-i;
+function sumer(n, s, R = [-1]){
+    //Casos Base
+    if(R.length==1 && R[0] >= 0) return R[0]; //n == 9? Creo que no hace falta
+    if(n==1 || s<1) return n;
+
+    //Casos recursivos
+    let suma = 0;
+    if(R[0]!=0) suma += sumer(n, s-1); //Si las R no son 0 suma su ultimo recorrido normal
+    if(R[0]==0 || R[0]==1){ //Si las R son 0 o 1 prepara para continuar con el siguiente bucle limitado (nueva R y profundidad-1)
+        R.shift();
+        s--;
     }
-    let base = 11-digits.length+i;
-    let recursivity = digits.length-1-i;
-    if(i == digits.length-1 || i == digits.length-2) base--; //Artimaña para que funcione con los ultimos digitos que dan problemas
+    else R[0]--; //Caso normal sigue restando a las repeticiones
     
-    //En caso de que sea mayor a su numero maximo de repeticiones se trunca a ese numero
-    if(digits[i] > base && digits.length != 2){
-        digits[i] = base;
+    return suma + sumer(n-1, s, R);
+}
+
+let cicles = []; 
+const lenght = digits.length;
+let fillZero = false;
+for(let i = 0; i < lenght; i++){
+    if(fillZero){
+        cicles.push(0);
+        continue;
     }
 
-    //En caso de que los demas sean numeros no compatibles para una escalera se descartan
-    //El siguiente es mas pequeño
-    if(digits[i]<=digits[i-1]){
-        break; //Ceros los demas
+    if(lenght == 1){
+        console.log("Numero menor a 10");
+        cicles.push(0);
+        break;
     }
-    
-    //Si es el primo lo pone directo
-    //Si es otro lo sube restando el anterior y 1 para que solo haga con 57 y no 56
-    //Si es el ultimo solo lo resta
-    if(i != 0){
-        let rest = digits[i]-digits[i-1];
-        
-        if(i == digits.length-1){
-            cicles.push([base, recursivity, rest]);
+
+    //Anterior mayor al siguiente, cadena rota
+    if(digits[i]<=digits[i-1]){
+        cicles.push(0);
+        fillZero = true; //Ceros los demas
+        continue;
+    }
+
+    //Primer digito
+    if(i == 0){
+        if(lenght == 2){
+            cicles.push(digits[i]-1);
         }else{
-            cicles.push([base, recursivity, rest-1]);
+            cicles.push(digits[i]);
         }
     }
     else{
-        if(digits.length == 2){
-            cicles.push([base, recursivity, digits[i]-1]);
+        let rest = digits[i]-digits[i-1];
+        //Si es el ultimo digito
+        if(i == lenght-1){
+            cicles.push(rest);
         }else{
-            cicles.push([base, recursivity, digits[i]]);
+            cicles.push(rest-1);
         }
+        
     }
 }
 
 console.log(cicles);
 
-cicles.map((d)=>{
-    sum += sumer(d[0], d[1], d[2]);
-});
+if(lenght == 2){
+    sum += sumer(8, 1, cicles);
+}else{
+    sum += sumer(8, lenght-1, cicles); //11-lenght
+}
 console.log(sum);
 
-/*
-let cicles = digits.map((dig, i)=>{
-    let d;
-    if(dig <= 9-i){
-        d = dig;
-    }else{
-        d = 9-i;
-    }
-    let rest = d-digits[i+1];
-
-    if(i === digits.length-1){
-        return d;
-    }
-    if(rest >=0 && i === 0){
-        return rest;
-    }
-    else if(rest > 1){
-        return rest-1;
-    }
-    else{
-        return 0;
-    }
-    
-});
-console.log(cicles);
-
-digits.map((d,i)=>{
-    if(i == 0 && d>digits[i+1]){
-        sum += d-digits[i+1];
-    }
-    else if (i==1 && d-1>digits[i+1]){
-        sum += sumer(8, d-digits[i+1]);
-    }
-    else if (i==2){
-        sum += sumer(7, d, sumer);
-    }
-    else if (i==3){
-        for(let i = 6; i>=1; i--){
-            sum += sumer(i, d, sumer);
-        }
-    }
-});
-console.log(sum);*/
-//console.log(sumer(7, 0, sumer));*/
+//329
