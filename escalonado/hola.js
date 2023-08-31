@@ -1,7 +1,7 @@
 let sum = 0;
             //4,3,2,1,0 posiciones
 //let digits = [3,4,2,8,2].reverse(); //numero 34.282
-let digits = [2,0,0,0];
+let digits = [1,0,0,0];
 
 
 /*
@@ -46,7 +46,12 @@ const lenght = digits.length;
 let fillZero = false;
 for(let i = 0; i < lenght; i++){
     if(fillZero){
-        cicles.push(0);
+        if(i >= lenght-2){
+            cicles.push(0);
+        }else{
+            cicles.push(1);
+        }
+        
         continue;
     }
 
@@ -58,8 +63,8 @@ for(let i = 0; i < lenght; i++){
 
     //Anterior mayor al siguiente, cadena rota
     if(digits[i]<=digits[i-1]){
-        cicles.push(0);
-        fillZero = true; //Ceros los demas
+        cicles.push(1);
+        fillZero = true; //Rellenar con 1 los demas
         continue;
     }
 
@@ -77,7 +82,7 @@ for(let i = 0; i < lenght; i++){
         if(i == lenght-1){
             cicles.push(rest);
         }else{
-            cicles.push(rest-1);
+            cicles.push(rest); //-1
         }
         
     }
@@ -88,7 +93,7 @@ console.log(cicles);
 if(lenght == 2){
     sum += sumer(8, 1, cicles);
 }else{
-    sum += sumer(8, lenght-1, cicles); //11-lenght
+    sum += sumer(7, lenght-1, cicles); //11-lenght
 }
 console.log(sum);
 
