@@ -21,6 +21,7 @@ bool FIND_PATH(int x, int y){
     if(map[y][x] == 'G') return true;
     if(map[y][x] == '#') return false;
     if(map[y][x] == '+') return false;
+    
 
     map[y][x] = '+';
     if(FIND_PATH(x+1,y) == true) return true; //Derecha
@@ -35,7 +36,7 @@ bool FIND_PATH(int x, int y){
 
 int main(){
     if(FIND_PATH(0, 0) == true){
-        cout << "Salida encotrada" << endl << '[';
+        cout << "Salida encontrada" << endl << '[';
         for(int y = 0; y < ySize; y++){
             for(int x = 0; x < xSize; x++){
                 cout << '\'' << map[y][x] << "\',";
