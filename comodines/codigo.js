@@ -34,7 +34,7 @@ function comodines(){
     for(let y = 0; y < arr.length; y++){
         for(let x = 0; x < arr[0].length; x++){
             let num = arr[y][x];
-            let result = expandVirus(y, x, num);
+            let result = expandVirus(x, y, num);
             if(result > maxCardNum[0]){
                 maxCardNum[0]=result;
                 maxCardNum[1]=num;

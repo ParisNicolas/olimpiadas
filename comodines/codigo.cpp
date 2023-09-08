@@ -2,17 +2,21 @@
 
 using namespace std;
 
-int arr[][3] = {{2,4,5},
-                {3,0,4},
-                {2,4,5},
-                {0,4,5},
-                {1,1,4}};
 
-
+int comodines(int *arr[3]);
 
 int main(){
 
+    int rows, cols;
+    cin >> rows;
+    cin >> cols;
+    int** arr = new int*[rows];
+    for (int i = 0; i < rows; ++i){
+        arr[i] = new int[cols];
+        arr[]
+    }
 
+    cout << comodines(arr) << endl;
 
     return 0;
 }
