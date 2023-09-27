@@ -27,6 +27,7 @@ int main(){
         reinas[i] =  {x, y};
         tablero[y-1][x-1] = i+1;
     }
+    inputFile.close();
 
     
 /*
@@ -83,6 +84,8 @@ int main(){
         }
         ouputFile << '\n';
     }
+
+    ouputFile.close();
     
     return 0;    
 }

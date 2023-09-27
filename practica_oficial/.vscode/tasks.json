@@ -1,24 +1,9 @@
 {
-    "name": "C++ Launch",
-    "type": "cppdbg",
-    "request": "launch",
-    "program": "${workspaceFolder}/a.out",
-    "args": [
-        "arg1",
-        "arg2"
-    ],
-    "environment": [
-        {
-            "name": "config",
-            "value": "Debug"
-        }
-    ],
-    "cwd": "${workspaceFolder}",
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: g++.exe build active file",
-            "command": "C:\\MinGW\\bin\\g++.exe",
+            "label": "C/C++: gcc.exe build active file",
+            "command": "C:\\MinGW\\bin\\gcc.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
