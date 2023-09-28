@@ -22,13 +22,14 @@ void procesaMatriz(vector<vector<int> > matriz, vector<long long> &resultadoEnAr
         }
     }
     
+    resultadoEnArreglo.resize(4);
     resultadoEnArreglo[0] = sum;
     resultadoEnArreglo[1] = mult;
     resultadoEnArreglo[2] = max;
     resultadoEnArreglo[3] = min;
-    resultadoEnMatriz.resize(2);
-    resultadoEnMatriz[0].push_back(sum);
-    resultadoEnMatriz[0].push_back(mult);
-    resultadoEnMatriz[1].push_back(max);
-    resultadoEnMatriz[1].push_back(min);
+    resultadoEnMatriz.resize(2, vector<long long>(2, 0));
+    resultadoEnMatriz[0][0] = sum;
+    resultadoEnMatriz[0][1] = mult;
+    resultadoEnMatriz[1][0] = max;
+    resultadoEnMatriz[1][1] = min;
 }
