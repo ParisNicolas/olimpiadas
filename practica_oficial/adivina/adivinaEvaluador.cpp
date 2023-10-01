@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 
+#include "adivina.cpp"
+
 using namespace std;
 
 int adivina();
