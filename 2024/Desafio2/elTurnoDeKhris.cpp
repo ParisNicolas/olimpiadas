@@ -63,7 +63,6 @@ int sanar(cvi& fila, cvi& col, cvi& vidaInicial, cvi& vidaActual, int d, vector<
     //Empiezo a comprobar si los jugadores estan al alcance de Khris
     for(int i=0; i<n; i++){
         int indiceJuagador = vidaFaltante[i].first; //Indice del jugador en cuestion
-        pair<int, int> posicionFinal; //Posicion final de khris (se pasa por referencia)
 
         //Compruebo si el jugador es alcanzable, sino paso al siguiente
         if(FIND_PATH(mapa, fila, col, indiceJuagador, d, xKhris, yKhris) == false){
@@ -83,7 +82,7 @@ int sanar(cvi& fila, cvi& col, cvi& vidaInicial, cvi& vidaActual, int d, vector<
 int main(){
 
     //NumJugadores, cantFilas, cantColumnas
-    int n,r,c,d;
+    int n,r,c;
     cin >> n >> r >> c;
 
     //Datos de los jugadores
@@ -93,6 +92,7 @@ int main(){
     }
 
     //cantMovimientos
+    int d;
     cin >> d;
 
     //Mapa de obstaculos
