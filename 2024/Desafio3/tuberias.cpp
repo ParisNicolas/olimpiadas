@@ -25,19 +25,16 @@ int rellenar(vector<tanque> &E, vector<int> tanquesAllenar, int hTuberia, int &v
     }
     
     if(suma > volRest){
-        int metrosCubicos = 0;
         int sumSuperficies = 0;
         for(int i=0, t; i<cant; i++){
             t = tanquesAllenar[i];
-
-            metrosCubicos += E[t].profundidad*E[t].superficie;
             sumSuperficies += E[t].superficie;
         }
-        int hAguaGeneral = (metrosCubicos - hTuberia*sumSuperficies)/sumSuperficies;
+        int hAguaExtra = volRest/sumSuperficies;
         volRest = 0;
         for(int i=0, t; i<cant; i++){
             t = tanquesAllenar[i];
-            E[t].alturaAgua = E[t].profundidad - hAguaGeneral;
+            E[t].alturaAgua += hAguaExtra;
         }
         return true;
     }
@@ -65,6 +62,7 @@ int rellenar(vector<tanque> &E, vector<int> tanquesAllenar, int hTuberia, int &v
         }
     }*/
 }
+
 
 vector<int> continuarLlenado(int &Vol, vector<tanque> &E, int nE, bool dir, bool first=false){
     vector<int> tanquesActivos = {nE}; //Tanques que comparten agua
@@ -104,7 +102,7 @@ vector<int> continuarLlenado(int &Vol, vector<tanque> &E, int nE, bool dir, bool
                 rellenar(E, tanquesActivos, sigTuberia, Vol); //Rellena
                 return tanquesActivos; //Regresa
             }
-        } 
+        }
         //tuberia derecha predominante
         else if(tuberiaIzq<tuberiaDer) {
             sig = ultimoTanqueDer+1; //Avanza
@@ -153,7 +151,6 @@ vector<int> continuarLlenado(int &Vol, vector<tanque> &E, int nE, bool dir, bool
 }
 
 int main(){
-    /*
     ifstream inputFile("truchas.in");
 
     if (!inputFile.is_open()) {
@@ -169,7 +166,7 @@ int main(){
     // Leer los datos de los primeros n-1 estanques
     for (int i = 0; i < n - 1; ++i) {
         int s, pe, pc;
-        inputFile >> s >> pe >> pe;
+        inputFile >> s >> pe >> pc;
         estanques[i].superficie = s;
         estanques[i].profundidad = pe;
         estanques[i].profundidadTub = pc;
@@ -186,23 +183,7 @@ int main(){
     inputFile >> vol >> nE;
     nE--;
 
-    inputFile.close();*/
-
-    int n = 4;
-    vector<tanque> estanques(n);
-
-    vector<int> superficies = {120, 80, 60, 50};
-    vector<int> profundidades = {7, 10, 5, 3};
-    vector<int> profundidadesTub = {4, 2, 1, 0};
-    for (int i = 0; i < n; ++i) {
-        estanques[i].profundidad = profundidades[i];
-        estanques[i].superficie = superficies[i];
-        estanques[i].profundidadTub = profundidadesTub[i];
-    }
-
-    int vol = 2000;  // Volumen en m³
-    int nE = 2;     // Número del estanque donde se inicia el llenado
-    nE--; //Indice 0 (para operar con vectores)
+    inputFile.close();
 
     //Sumao la capacidad total de los estanques
     int volumenTotal = 0;
