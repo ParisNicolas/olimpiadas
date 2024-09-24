@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "e:/c++/olimpiadas/2024/Desafio6",
-      "program": "e:/c++/olimpiadas/2024/Desafio6/build/Debug/outDebug",
+      "cwd": "e:/c++/olimpiadas/2024/extra/procesadorDeTexto",
+      "program": "e:/c++/olimpiadas/2024/extra/procesadorDeTexto/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
